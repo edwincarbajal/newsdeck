@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Draggable } from 'react-beautiful-dnd'
 import Article from './article'
 import {
   Segment, Header, Item
@@ -7,16 +8,20 @@ import {
 export default class Column extends Component {
   render() {
     return (
-      <>
-        <Header as='h2' attached='top'>
-          {this.props.column.title}
-        </Header>
-        <Segment attached>
-          <Item>
-            {this.props.articles.map(article => <Article key={article.id} article={article} /> )}
-          </Item>
-        </Segment>
-      </>
+      <Draggable draggableId={this.props.column.id} index={this.props.index}>
+        {(provided) => (
+          <div>
+            <Header as='h2' attached='top'>
+              {this.props.column.title}
+            </Header>
+            <Segment attached>
+              <Item.Group divided>
+                {this.props.articles.map((article, id) => <Article key={id} article={article} /> )}
+              </Item.Group>
+            </Segment>
+          </div>
+        )}
+      </Draggable>
     )
   }
 }
