@@ -7,7 +7,6 @@ import SideBar from "./components/sidebar";
 function App() {
   return (
     <Layout>
-	  <SideBar />
       <Main />
     </Layout>
   );
