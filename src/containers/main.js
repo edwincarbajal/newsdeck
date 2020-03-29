@@ -6,8 +6,23 @@ import {
 } from 'semantic-ui-react'
 import initialData from '../data/index'
 
+const axios = require('axios');
 export default class Main extends Component {
   state = initialData;
+
+  componentDidMount() {
+    axios.get(`https://inner-magpie-257319.appspot.com/api/news/results`, {
+        topic: "trump",
+        pageNumber: 1,
+        paginationLength: 10
+      })
+      .then((response) => {
+        console.log(response)
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
+  }
 
   onDragEnd = result => {
     const { destination, source, draggableId, type } = result;
