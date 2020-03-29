@@ -4,7 +4,6 @@ import Main from './containers/main'
 import Form from './login/form/Form';
 import LoginForm from './login/Login';
 
-
 class App extends Component {
 
   constructor(props) {
