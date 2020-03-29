@@ -11,13 +11,18 @@ export default class Column extends Component {
       <Draggable type="column" draggableId={this.props.column.id} index={this.props.index}>
         {(provided) => (
           <div {...provided.draggableProps} ref={provided.innerRef}>
-            <Header as='h2' attached='top' {...provided.dragHandleProps}>
+            <Header as='h2' attached='top'
+              {...provided.dragHandleProps}
+              style={{ minHeight: 84 }}
+            >
               {this.props.column.title}
             </Header>
-            <Segment attached>
-              <Item.Group divided>
-                {this.props.articles.map((article, index) => <Article key={index} article={article} index={index} /> )}
-              </Item.Group>
+            <Segment attached style={{ overflowY: 'scroll', height: '100%' }}>
+              <div style={{ display: 'block' }}>
+                <Item.Group divided>
+                  {this.props.articles.map((article, index) => <Article key={index} article={article} index={index} /> )}
+                </Item.Group>
+              </div>
             </Segment>
           </div>
         )}

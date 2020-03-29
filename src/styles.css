@@ -1,4 +1,9 @@
 
+a[href*="search"] {
+background:url(https://twitter.com/favicon.ico) no-repeat left center;
+padding-left:19px;
+}
+
 /* Individual item */
 .bm-item {
   display: inline-block;

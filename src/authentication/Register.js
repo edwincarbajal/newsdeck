@@ -52,7 +52,7 @@ const Register = (props) => {
         <Container style={{
             marginTop: '20px',
         }}>
-            <Header as="h1" textAlign="center">Login</Header>
+            <Header as="h1" textAlign="center">Register</Header>
             <Form size='large'>
                 <Form.Input
                     id="firstName"
