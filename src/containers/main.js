@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Column from '../components/column'
+import {
+  Grid
+} from 'semantic-ui-react'
 
 import initialData from '../data/index'
 
@@ -12,28 +15,34 @@ export default class Main extends Component {
   }
 
   render() {
-    return this.state.columnOrder.map((columnId, index) => {
-      const column = this.state.columns[columnId];
-      const articles = column.articleIds.map(articleId => this.state.articles[articleId]);
+    return (
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <Droppable
+          droppableId="all-columns"
+          direction="horizontal"
+          type="column"
+        >
+          {(provided) => (
+            <Grid.Column>
+              {this.state.columnOrder.map((columnId, index) => {
+                const column = this.state.columns[columnId];
+                const articles = column.articleIds.map(articleId => this.state.articles[articleId]);
 
-      return (
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <Droppable
-            droppableId="all-columns"
-            direction="horizontal"
-            type="column"
-          >
-            {() => (
-              <Column
-                key={column.id}
-                column={column}
-                articles={articles}
-                index={index}
-              />
-            )}
-          </Droppable>
-        </DragDropContext>
-      );
-    });
-  }
+                return(
+                  <Column
+                    {...provided.droppableProps}
+                    innerRef={provided.innerRef}
+                    key={column.id}
+                    column={column}
+                    articles={articles}
+                    index={index}
+                  />)
+              })}
+              {provided.placeholder}
+            </Grid.Column>
+          )}
+        </Droppable>
+      </DragDropContext>
+    );
+  };
 }
