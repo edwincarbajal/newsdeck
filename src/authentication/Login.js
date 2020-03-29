@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react'
 import { Button, Form, Container, Header, FormField, Label } from 'semantic-ui-react'
 import validator from 'validator';
+import config from 'config';
 
 const Login = (props) => {
   const [email, setEmail] = useState('')
