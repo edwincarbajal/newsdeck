@@ -1,100 +1,89 @@
 import React, { Component } from "react";
-import styled, { css } from "styled-components";
-import InputDefault from "../components/InputDefault";
-import ButtonDefaultStateFocus from "../components/ButtonDefaultStateFocus";
-import ButtonDefaultPrimary from "../components/ButtonDefaultPrimary";
+import { StyleSheet, View, Image, Text } from "react-native";
+import InputDefault from "./components/InputDefault";
+import ButtonDefaultStateFocus from "./components/ButtonDefaultStateFocus";
+import ButtonDefaultPrimary from "./components/ButtonDefaultPrimary";
 
-function SignUp(props) {
+function Index(props) {
   return (
-    <Root>
-      <Rectangle3>
+    <View style={styles.container}>
+      <View style={styles.rectangle3}>
         <Image
-          src={require("../public/logo.png")}
+          source={require("./assets/images/logo.png")}
+          resizeMode="contain"
+          style={styles.image}
         ></Image>
-        <NewsDeck>NewsDeck</NewsDeck>
-        <InputDefault
-          style={{
-            width: 277,
-            height: 47,
-            backgroundColor: "transparent",
-            opacity: 1,
-            marginTop: 178,
-            alignSelf: "center"
-          }}
-        ></InputDefault>
+        <Text style={styles.newsDeck}>NewsDeck</Text>
+        <InputDefault style={styles.inputDefault1}></InputDefault>
         <ButtonDefaultStateFocus
-          style={{
-            width: 277,
-            height: 52,
-            backgroundColor: "transparent",
-            opacity: 1,
-            marginTop: 11,
-            alignSelf: "center"
-          }}
           text1=""
+          style={styles.buttonDefaultStateFocus1}
         ></ButtonDefaultStateFocus>
         <ButtonDefaultPrimary
-          style={{
-            width: 179,
-            height: 47,
-            backgroundColor: "transparent",
-            opacity: 1,
-            marginTop: 17,
-            alignSelf: "center"
-          }}
+          style={styles.buttonDefaultPrimary}
         ></ButtonDefaultPrimary>
-        <Register>Don&#39;t have an account yet?</Register>
-      </Rectangle3>
-    </Root>
+        <Text style={styles.loremIpsum}>Don&#39;t have an account yet?</Text>
+      </View>
+    </View>
   );
 }
 
-const Root = styled.div`
-  display: flex;
-  background-color: white;
-  flex-direction: column;
-  height: 100vh;
-  width: 100vw;
-`;
+const styles = StyleSheet.create({
+  container: {
+    width: 534,
+    height: 768
+  },
+  rectangle3: {
+    backgroundColor: "rgba(255,255,255,1)",
+    flex: 1
+  },
+  image: {
+    width: 113,
+    height: 114,
+    marginTop: 26,
+    marginLeft: 210
+  },
+  newsDeck: {
+    width: 146,
+    height: 54,
+    color: "#121212",
+    fontSize: 30,
+    fontFamily: "roboto-regular",
+    marginLeft: 194
+  },
+  inputDefault1: {
+    width: 277,
+    height: 47,
+    backgroundColor: "transparent",
+    opacity: 1,
+    marginTop: 178,
+    marginLeft: 128
+  },
+  buttonDefaultStateFocus1: {
+    width: 277,
+    height: 52,
+    backgroundColor: "transparent",
+    opacity: 1,
+    marginTop: 11,
+    marginLeft: 128
+  },
+  buttonDefaultPrimary: {
+    width: 179,
+    height: 47,
+    backgroundColor: "transparent",
+    opacity: 1,
+    marginTop: 16,
+    marginLeft: 177
+  },
+  loremIpsum: {
+    width: 170,
+    height: 50,
+    color: "#121212",
+    fontSize: 14,
+    fontFamily: "roboto-regular",
+    marginTop: 38,
+    marginLeft: 182
+  }
+});
 
-const Rectangle3 = styled.div`
-  width: 534px;
-  height: 768px;
-  background-color: rgba(255,255,255,1);
-  flex-direction: column;
-  display: flex;
-  margin-top: 12px;
-  align-self: center;
-`;
-
-const Image = styled.img`
-  width: 113px;
-  height: 100%;
-  margin-top: 26px;
-  margin-left: 210px;
-  object-fit: contain;
-`;
-
-const NewsDeck = styled.span`
-  font-family: System;
-  width: 146px;
-  height: 54px;
-  color: #121212;
-  font-size: 30px;
-  font-weight: regular;
-  font-style: normal;
-  margin-left: 194px;
-`;
-
-const Register = styled.span`
-  font-family: System;
-  width: 170px;
-  height: 50px;
-  color: #121212;
-  font-size: 14px;
-  font-weight: regular;
-  font-style: normal;
-  margin-top: 37px;
-  align-self: center;
-`;
-
+export default Index;
