@@ -9,7 +9,7 @@ function Index(props) {
     <View style={styles.container}>
       <View style={styles.rectangle3}>
         <Image
-          source={require("./assets/images/logo.png")}
+          source={require("../public/logo.png")}
           resizeMode="contain"
           style={styles.image}
         ></Image>
