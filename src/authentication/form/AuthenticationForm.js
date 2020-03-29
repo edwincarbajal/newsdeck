@@ -9,11 +9,14 @@ import {
 import Recommendation from '../recommendation/Recommendation';
 import Login from '../Login';
 import Register from '../Register';
+import axios from 'axios';
+
 
 class AuthenticationForm extends Component {
     state = {
         isNew: false,
-        error: null
+        error: null,
+        isAuthenticated: false
     }
 
     toggleForm = () => {
@@ -23,7 +26,14 @@ class AuthenticationForm extends Component {
     }
 
     handleLogin = (email, password) => {
+        const baseURL = "http://150.136.114.158:8080";
 
+        let data = { email, password }
+        axios.post(`${baseURL}/api/auth/login`, data)
+            .then(response => {
+                localStorage.setItem('session', response)
+            })
+            .catch(err => this.setState({ error: err }))
     }
 
     handleRegister = (firstName, lastName, email, password, confirmPassword) => {
