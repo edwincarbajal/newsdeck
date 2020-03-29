@@ -13,14 +13,34 @@ import axios from 'axios';
 
 
 class AuthenticationForm extends Component {
-    state = {
-        baseURL: "https://inner-magpie-257319.appspot.com",
-        isNew: false,
-        error: null,
-        isAuthenticated: false,
-        tags: [],
-        response: null
+    constructor(props) {
+        super(props)
+        this.state = {
+            baseURL: "http://150.136.114.158:8080",
+            isNew: false,
+            error: null,
+            isAuthenticated: false,
+            tags: [],
+            response: null
+        }
+
+        axios.post(`${this.state.baseURL}/api/twitter`)
+            .then(res => res.data.access_token)
+            .then(token => {
+                let headers = {
+                    "Authorization": `Bearer ${token}`
+                }
+                axios.get(`${this.state.baseURL}/api/twitter/trends`, { headers })
+                    .then(res => {
+                        const tagNames = res.data[0].trends.map(obj => obj.name)
+                        this.setState({ tags: tagNames });
+                    })
+                    .catch(err => console.log(err))
+            })
+            .catch(err => console.log(err))
     }
+
+
 
     toggleForm = () => {
         this.setState({
@@ -78,7 +98,7 @@ class AuthenticationForm extends Component {
             }} >
                 <Header style={{ color: 'teal', fontSize: '100px' }} textAlign='center'>NewsDeck</Header>
                 <Header as='h1' textAlign='center' color='black'>Organize Your Knowledge. Read Smarter. Informed Faster.</Header>
-                <Recommendation handleChoosingTopic={this.handleChoosingTopic} />
+                <Recommendation tags={this.state.tags} handleChoosingTopic={this.handleChoosingTopic} />
                 {this.state.isNew ? <Register handleRegister={this.handleRegister} /> : <Login handleLogin={this.handleLogin} />}
                 <Message><a onClick={this.toggleForm}>{this.state.isNew ? 'Log In With Us!' : 'Need An Account?'}</a></Message>
             </Container>
