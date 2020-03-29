@@ -10,40 +10,62 @@ export default class Main extends Component {
   state = initialData;
 
   onDragEnd = result => {
-    // TODO: reoder our column
+    const { destination, source, draggableId, type } = result;
+
+    if(!destination) {
+      return;
+    }
+
+    if(
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    if(type === "column") {
+      const newColumnOrder = Array.from(this.state.columnOrder);
+      newColumnOrder.splice(source.index, 1);
+      newColumnOrder.splice(destination.index, 0, draggableId);
+
+      const newState = {
+        ...this.state,
+        columnOrder: newColumnOrder,
+      }
+      this.setState(newState);
+      return;
+    }
   }
 
   render() {
     return (
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable
-            droppableId="all-columns"
+            droppableId="root"
             direction="horizontal"
             type="column"
           >
             {(provided) => (
-                <div>
+                <Grid.Row as={"div"}>
                   {this.state.columnOrder.map((columnId, index) => {
                     const column = this.state.columns[columnId];
                     const articles = column.articleIds.map(articleId => this.state.articles[articleId]);
-
                     return(
-                      <div
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        key={column.id}
-                      >
-                        <Grid.Column>
-                          <Column
-                            column={column}
-                            articles={articles}
-                            index={index}
-                          />
-                        </Grid.Column>
-                      </div>
+                      <Grid.Column key={column.id}>
+                        <div
+                          {...provided.droppableProps}
+                          ref={provided.innerRef}
+                        >
+                            <Column
+                              column={column}
+                              articles={articles}
+                              index={index}
+                            />
+                        </div>
+                      </Grid.Column>
             )})}
                 {provided.placeholder}
-              </div>
+              </Grid.Row>
             )}
           </Droppable>
         </DragDropContext>
