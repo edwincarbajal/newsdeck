@@ -11,17 +11,17 @@ export default class Main extends Component {
   state = initialData;
 
   componentDidMount() {
-    axios.get(`https://inner-magpie-257319.appspot.com/api/news/results`, {
-        topic: "trump",
-        pageNumber: 1,
-        paginationLength: 10
-      })
-      .then((response) => {
-        console.log(response)
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
+    axios.get(`http://150.136.114.158:8080/api/news/results`, {
+      topic: "trump",
+      pageNumber: 1,
+      paginationLength: 10
+    })
+    .then((response) => {
+      console.log(response)
+    })
+    .catch(function(error) {
+      console.log(error)
+    })
   }
 
   onDragEnd = result => {
