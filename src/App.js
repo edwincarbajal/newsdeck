@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Layout from './components/layout'
 import Main from './containers/main'
-import Sidebar from './components/sidebar/sidebar';
+import Form from './login/form/Form';
 
-function App() {
-  return (
-    <Layout>
-      <Sidebar />
-      <Main />
-    </Layout>
-  );
+class App extends Component {
+
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    return (
+      <div>
+        <Form />
+      </div>
+    );
+  }
+
 }
 
 export default App;
