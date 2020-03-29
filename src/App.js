@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Layout from './components/layout'
 import Main from './containers/main'
-import Form from './splash/form/Form';
+import Form from './login/form/Form';
 
 class App extends Component {
 
