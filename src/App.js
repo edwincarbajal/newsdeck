@@ -6,13 +6,31 @@ import LoginForm from './login/Login';
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+
+    this.state = {
+      isAuthenticated: false
+    }
+  }
+
+  handleAuthentication = ({ response, tags }) => {
+    if (response) {
+      console.log(response)
+      localStorage.setItem("session", response)
+      localStorage.setItem("tags", tags)
+      this.setState({ isAuthenticated: true })
+    }
   }
 
   render() {
     return (
       <div>
-        <AuthenticationForm />
+        {this.state.isAuthenticated ? (
+          <Layout>
+            <Main></Main>
+          </Layout>
+        ) : (<AuthenticationForm handleAuthentication={this.handleAuthentication} />)
+        }
       </div>
     );
   }
