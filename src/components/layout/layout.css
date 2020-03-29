@@ -1,0 +1,12 @@
+.MyContainer {
+    left: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #e1e8ed;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
