@@ -5,21 +5,23 @@ import {
   Segment, Header, Item
 } from 'semantic-ui-react'
 
+const Container = ({children}, props) => <div ref={props.innerRef}>{children}</div>;
+
 export default class Column extends Component {
   render() {
     return (
-      <Draggable draggableId={this.props.column.id} index={this.props.index}>
+      <Draggable draggableId={this.props.column.index} index={this.props.index}>
         {(provided) => (
-          <div>
-            <Header as='h2' attached='top'>
+          <Container {...provided.draggableProps} innerRef={provided.innerRef}>
+            <Header as='h2' attached='top' {...provided.dragHandleProps}>
               {this.props.column.title}
             </Header>
             <Segment attached>
               <Item.Group divided>
-                {this.props.articles.map((article, id) => <Article key={id} article={article} /> )}
+                {this.props.articles.map((article, index) => <Article key={index} article={article} index={index} /> )}
               </Item.Group>
             </Segment>
-          </div>
+          </Container>
         )}
       </Draggable>
     )
