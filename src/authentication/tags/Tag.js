@@ -12,8 +12,10 @@ export default class Tag extends Component {
     }
 
     toggleChosen = () => {
+        this.props.handleChoosingTopic({ chosen: !this.state.chosen, tagName: this.props.tagName })
         this.setState({ chosen: !this.state.chosen })
     }
+
 
     render() {
         var linkStyle;

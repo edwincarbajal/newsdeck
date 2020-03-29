@@ -14,10 +14,12 @@ import axios from 'axios';
 
 class AuthenticationForm extends Component {
     state = {
-        baseURL: "http://150.136.114.158:8080",
+        baseURL: "https://inner-magpie-257319.appspot.com",
         isNew: false,
         error: null,
-        isAuthenticated: false
+        isAuthenticated: false,
+        tags: [],
+        response: null
     }
 
     toggleForm = () => {
@@ -29,20 +31,40 @@ class AuthenticationForm extends Component {
     handleLogin = (email, password) => {
 
         let data = { email, password }
+
+        console.log(data)
         axios.post(`${this.state.baseURL}/api/auth/login`, data)
             .then(response => {
-                localStorage.setItem('session', response)
+                this.props.handleAuthentication({ response, tags: this.state.tags })
             })
             .catch(err => this.setState({ error: err }))
+        localStorage.setItem("session", this.state.response)
+        localStorage.setItem("tags", this.state.tags)
+        if (this.state.response) {
+            this.props.handleAuthentication()
+        }
     }
 
     handleRegister = (firstName, lastName, email, password, confirmPassword) => {
 
+        let data = { firstName, lastName, email, password, tags: this.state.tags }
+
+        axios.post(`${this.state.baseURL}/api/auth/register`, data)
+            .then(response => this.props.handleAuthentication({ response, tags: this.state.tags })
+            )
+            .catch(err => this.setState({ error: err }))
     }
 
-    handleChoosingTopic = (e) => {
-        e.preventDefault();
-        console.log(e)
+    handleChoosingTopic = ({ chosen, tagName }) => {
+        if (!chosen) {
+            const newTags = this.state.tags;
+            var index = newTags.indexOf(tagName);
+            if (index !== -1) newTags.splice(index, 1);
+            // let newTags = this.state.tags.map(tag => tag !== tagName ? tag : null)
+            this.setState({ tags: newTags })
+        } else {
+            this.setState({ tags: [...this.state.tags, tagName] })
+        }
     }
 
     render() {
