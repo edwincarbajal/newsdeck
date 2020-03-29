@@ -14,6 +14,7 @@ import axios from 'axios';
 
 class AuthenticationForm extends Component {
     state = {
+        baseURL: "http://150.136.114.158:8080",
         isNew: false,
         error: null,
         isAuthenticated: false
@@ -26,10 +27,9 @@ class AuthenticationForm extends Component {
     }
 
     handleLogin = (email, password) => {
-        const baseURL = "http://150.136.114.158:8080";
 
         let data = { email, password }
-        axios.post(`${baseURL}/api/auth/login`, data)
+        axios.post(`${this.state.baseURL}/api/auth/login`, data)
             .then(response => {
                 localStorage.setItem('session', response)
             })
@@ -38,6 +38,11 @@ class AuthenticationForm extends Component {
 
     handleRegister = (firstName, lastName, email, password, confirmPassword) => {
 
+    }
+
+    handleChoosingTopic = (e) => {
+        e.preventDefault();
+        console.log(e)
     }
 
     render() {
@@ -51,7 +56,7 @@ class AuthenticationForm extends Component {
             }} >
                 <Header style={{ color: 'teal', fontSize: '100px' }} textAlign='center'>NewsDeck</Header>
                 <Header as='h1' textAlign='center' color='black'>Organize Your Knowledge. Read Smarter. Informed Faster.</Header>
-                <Recommendation />
+                <Recommendation handleChoosingTopic={this.handleChoosingTopic} />
                 {this.state.isNew ? <Register handleRegister={this.handleRegister} /> : <Login handleLogin={this.handleLogin} />}
                 <Message><a onClick={this.toggleForm}>{this.state.isNew ? 'Log In With Us!' : 'Need An Account?'}</a></Message>
             </Container>

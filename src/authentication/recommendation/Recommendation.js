@@ -11,10 +11,11 @@ class Recommendation extends Component {
     }
 
     renderTags = () => {
-        return this.state.items.map((tagName, i) => <Tag key={i} tagName={tagName}></Tag>);
+        return this.state.items.map((tagName, i) => <Tag handleChoosingTopic={this.props.handleChoosingTopic} key={i} tagName={tagName}></Tag>);
     }
 
     render() {
+
         return (
             <div className="Container">
                 {this.renderTags()}
