@@ -3,12 +3,12 @@ import { stack as Menu } from "react-burger-menu";
 
 export default props => {
   return (
-    <Menu width={ 100 } >
-      <a className="menu-item" href="/">1</a>
+    <Menu width={ 130 } >
+      <a className="menu-item" href="/">NewsDeck</a>
 
-      <a className="menu-item" href="/">2</a>
+      <a className="menu-item" href="search">Search</a>
 
-      <a className="menu-item" href="/">3</a>
+      <a className="menu-item--small" href="logout">Logout</a>
 
     </Menu>
   );
