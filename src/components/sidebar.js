@@ -10,7 +10,6 @@ export default props => {
 
       <a className="menu-item" href="/">3</a>
 
-      <a className="menu-item" href="/">4</a>
     </Menu>
   );
 };
