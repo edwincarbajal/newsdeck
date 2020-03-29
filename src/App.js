@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-
 import AuthenticationForm from './authentication/form/AuthenticationForm';
-
 import Layout from './components/layout'
 import Main from './containers/main'
-import AuthenticationForm from './authentication/form/AuthenticationForm';
-import LoginForm from './login/Login';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isAuthenticated: false
+      isAuthenticated: true
     }
   }
 

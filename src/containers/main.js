@@ -11,34 +11,34 @@ export default class Main extends Component {
   state = initialData;
 
   componentDidMount() {
-    axios.get(`http://150.136.114.158:8080/api/news/results`, {
-      topic: "trump",
-      pageNumber: 1,
+    axios.post(`http://150.136.114.158:8080/api/news/results`, {
+      topic: "coronavirus",
+      pageNumber: 2,
       paginationLength: 10
     })
-    .then((response) => {
-      console.log(response)
-    })
-    .catch(function(error) {
-      console.log(error)
-    })
+      .then((response) => {
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   }
 
   onDragEnd = result => {
     const { destination, source, draggableId, type } = result;
 
-    if(!destination) {
+    if (!destination) {
       return;
     }
 
-    if(
+    if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
     ) {
       return;
     }
 
-    if(type === "column") {
+    if (type === "column") {
       const newColumnOrder = Array.from(this.state.columnOrder);
       newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, draggableId);
@@ -54,37 +54,38 @@ export default class Main extends Component {
 
   render() {
     return (
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <Droppable
-            droppableId="all-columns"
-            direction="horizontal"
-            type="column"
-          >
-            {(provided) => (
-                <div style={{ display: '-webkit-inline-box' }}>
-                  {this.state.columnOrder.map((columnId, index) => {
-                    console.log(columnId)
-                    const column = this.state.columns[columnId];
-                    const articles = column.articleIds.map(articleId => this.state.articles[articleId]);
-                    return(
-                        <div
-                          {...provided.droppableProps}
-                          ref={provided.innerRef}
-                          key={index}
-                          style={{ width: 400 }}
-                        >
-                            <Column
-                              column={column}
-                              articles={articles}
-                              index={index}
-                            />
-                        </div>
-            )})}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <Droppable
+          droppableId="all-columns"
+          direction="horizontal"
+          type="column"
+        >
+          {(provided) => (
+            <div style={{ display: '-webkit-inline-box' }}>
+              {this.state.columnOrder.map((columnId, index) => {
+                console.log(columnId)
+                const column = this.state.columns[columnId];
+                const articles = column.articleIds.map(articleId => this.state.articles[articleId]);
+                return (
+                  <div
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    key={index}
+                    style={{ width: 400 }}
+                  >
+                    <Column
+                      column={column}
+                      articles={articles}
+                      index={index}
+                    />
+                  </div>
+                )
+              })}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     );
   };
 }
