@@ -43,7 +43,7 @@ function SignUp(props) {
             alignSelf: "center"
           }}
         ></ButtonDefaultPrimary>
-        <LoremIpsum>Don&#39;t have an account yet?</LoremIpsum>
+        <Register>Don&#39;t have an account yet?</Register>
       </Rectangle3>
     </Root>
   );
@@ -86,7 +86,7 @@ const NewsDeck = styled.span`
   margin-left: 194px;
 `;
 
-const LoremIpsum = styled.span`
+const Register = styled.span`
   font-family: System;
   width: 170px;
   height: 50px;
@@ -98,4 +98,3 @@ const LoremIpsum = styled.span`
   align-self: center;
 `;
 
-export default SignUp;
