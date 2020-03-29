@@ -41,20 +41,22 @@ export default class Main extends Component {
     return (
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable
-            droppableId="root"
+            droppableId="all-columns"
             direction="horizontal"
             type="column"
           >
             {(provided) => (
-                <Grid.Row as={"div"}>
+                <div style={{ display: '-webkit-inline-box' }}>
                   {this.state.columnOrder.map((columnId, index) => {
+                    console.log(columnId)
                     const column = this.state.columns[columnId];
                     const articles = column.articleIds.map(articleId => this.state.articles[articleId]);
                     return(
-                      <Grid.Column key={column.id}>
                         <div
                           {...provided.droppableProps}
                           ref={provided.innerRef}
+                          key={index}
+                          style={{ width: 400 }}
                         >
                             <Column
                               column={column}
@@ -62,10 +64,9 @@ export default class Main extends Component {
                               index={index}
                             />
                         </div>
-                      </Grid.Column>
             )})}
                 {provided.placeholder}
-              </Grid.Row>
+              </div>
             )}
           </Droppable>
         </DragDropContext>
