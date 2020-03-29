@@ -4,7 +4,6 @@ import Main from './containers/main'
 import AuthenticationForm from './authentication/form/AuthenticationForm';
 import LoginForm from './login/Login';
 
-
 class App extends Component {
   constructor(props) {
     super(props)
@@ -12,9 +11,9 @@ class App extends Component {
 
   render() {
     return (
-      <Layout>
-        <Main />
-      </Layout>
+      <div>
+        <AuthenticationForm />
+      </div>
     );
   }
 
