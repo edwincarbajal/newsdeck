@@ -1,0 +1,10 @@
+.Container {
+    flex-wrap: wrap;
+    overflow: hidden;
+    max-height: 260px;
+    margin-top: 45px;
+    justify-content: center;
+    display: flex;
+    box-sizing: inherit;
+    margin: 40px;
+}
